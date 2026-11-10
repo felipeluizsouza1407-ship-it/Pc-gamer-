@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu PC Gamer Virtual</title>
+<style>
+* {box-sizing:border-box}
+body {
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family:Arial,sans-serif;
+  color:white;
+  background:linear-gradient(135deg,#080019,#101c42,#35004b);
+}
+.desktop {padding:25px; height:calc(100vh - 55px)}
+h1 {color:#00eeff;text-shadow:0 0 15px cyan}
+.icons {display:grid;grid-template-columns:90px;gap:25px}
+.app {
+  cursor:pointer;text-align:center;
+  padding:10px;border-radius:12px;
+}
+.app:hover {background:#ffffff25}
+.app span {font-size:38px;display:block}
+.taskbar {
+  position:absolute;bottom:0;width:100%;height:55px;
+  background:#101020eF;display:flex;
+  align-items:center;justify-content:center;gap:25px;
+}
+button {
+  cursor:pointer;border:1px solid #00eaff;
+  background:#17172c;color:white;
+  padding:12px 18px;border-radius:10px;
+}
+button:hover {background:#174c65}
+.window {
+  display:none;position:absolute;top:20%;left:10%;
+  width:80%;max-width:500px;
+  background:#17172c;border:2px solid #00eaff;
+  border-radius:15px;padding:20px;
+  box-shadow:0 0 25px #00eaff80;
+}
+#clock {position:absolute;right:15px}
+</style>
+</head>
+<body>
+
+<div class="desktop">
+<h1>⚡ GAMER PC</h1>
+<p>Bem-vindo ao seu computador gamer!</p>
+
+<div class="icons">
+  <div class="app" onclick="openApp('games')">
+    <span>🎮</span>Jogos
+  </div>
+  <div class="app" onclick="openApp('files')">
+    <span>📁</span>Arquivos
+  </div>
+  <div class="app" onclick="openApp('settings')">
+    <span>⚙️</span>Configurações
+  </div>
+  <div class="app" onclick="openApp('browser')">
+    <span>🌐</span>Internet
+  </div>
+</div>
+</div>
+
+<div id="window" class="window">
+  <button onclick="closeApp()" style="float:right">✖</button>
+  <h2 id="title">Aplicativo</h2>
+  <div id="content"></div>
+</div>
+
+<div class="taskbar">
+  <button onclick="openApp('start')">⊞ Iniciar</button>
+  <span>🎮 GAMER</span>
+  <span id="clock"></span>
+</div>
+
+<script>
+function openApp(app) {
+  const win = document.getElementById("window");
+  const title = document.getElementById("title");
+  const content = document.getElementById("content");
+
+  const apps = {
+    start: ["Menu Iniciar","🎮 Jogos<br>📁 Arquivos<br>⚙️ Configurações"],
+    games: ["Biblioteca de Jogos","🎮 Minecraft<br>🚗 Corrida<br>⚽ Futebol<br>👾 Arcade"],
+    files: ["Meus Arquivos","📁 Documentos<br>📁 Downloads<br>📁 Imagens"],
+    settings: ["Configurações","🌈 Modo RGB<br>🖥️ Tela Gamer<br>🔊 Som"],
+    browser: ["Navegador","🌐 Bem-vindo à internet!"]
+  };
+
+  title.innerText = apps[app][0];
+  content.innerHTML = apps[app][1];
+  win.style.display = "block";
+}
+function closeApp() {
+  document.getElementById("window").style.display = "none";
+}
+function updateClock() {
+  document.getElementById("clock").innerText =
+    new Date().toLocaleTimeString("pt-BR");
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
